@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +18,7 @@ public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
-    private Long id;
+    private UUID id;
     @Column(nullable = false, updatable = false)
     private Long userId;
     private LocalDate transactionDate;

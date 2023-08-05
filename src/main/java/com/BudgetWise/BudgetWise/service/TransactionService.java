@@ -19,7 +19,7 @@ public class TransactionService {
         return transactionRepository.findAllByUserId(user.getId());
     }
 
-    public Transaction saveTransaction(Transaction transaction) {
+    public Transaction addTransaction(Transaction transaction) {
         return transactionRepository.saveAndFlush(transaction);
     }
 }
