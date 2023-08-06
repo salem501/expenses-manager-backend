@@ -7,9 +7,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
     @Query("select t from Transaction t where t.userId = :userId")
-    List<Transaction> findAllByUserId(@Param("userId")Long id);
+    List<Transaction> findAllTransactionsByUserId(@Param("userId") UUID userId);
+
+    void deleteTransactionById(UUID id);
 }

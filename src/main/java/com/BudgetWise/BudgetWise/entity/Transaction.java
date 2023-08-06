@@ -20,7 +20,7 @@ public class Transaction implements Serializable {
     @Column(nullable = false, updatable = false)
     private UUID id;
     @Column(nullable = false, updatable = false)
-    private Long userId;
+    private UUID userId;
     private LocalDate transactionDate;
     private String category;
     private BigDecimal amount;

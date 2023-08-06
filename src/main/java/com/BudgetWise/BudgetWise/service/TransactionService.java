@@ -1,11 +1,10 @@
 package com.BudgetWise.BudgetWise.service;
 
 import com.BudgetWise.BudgetWise.entity.Transaction;
-import com.BudgetWise.BudgetWise.entity.User;
 import com.BudgetWise.BudgetWise.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TransactionService {
@@ -15,11 +14,16 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public List<Transaction> findAllTransactionsByUser(User user) {
-        return transactionRepository.findAllByUserId(user.getId());
+    public List<Transaction> findAllTransactionsByUserId(UUID userId) {
+        return transactionRepository.findAllTransactionsByUserId(userId);
     }
 
     public Transaction addTransaction(Transaction transaction) {
-        return transactionRepository.saveAndFlush(transaction);
+        return transactionRepository.save(transaction);
+    }
+
+    public Transaction updateTransaction(Transaction transaction) {
+        transactionRepository.deleteTransactionById(transaction.getId());
+        return transactionRepository.save(transaction);
     }
 }
