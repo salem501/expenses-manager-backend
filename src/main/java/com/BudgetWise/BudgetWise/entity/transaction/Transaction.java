@@ -1,4 +1,4 @@
-package com.BudgetWise.BudgetWise.entity;
+package com.BudgetWise.BudgetWise.entity.transaction;
 
 import jakarta.persistence.*;
 
@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
