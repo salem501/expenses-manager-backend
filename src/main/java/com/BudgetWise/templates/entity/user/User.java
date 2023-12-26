@@ -1,4 +1,4 @@
-package com.BudgetWise.BudgetWise.entity.user;
+package com.BudgetWise.templates.entity.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;

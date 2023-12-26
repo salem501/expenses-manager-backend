@@ -1,4 +1,4 @@
-package com.BudgetWise.BudgetWise.Dto.transaction;
+package com.BudgetWise.templates.Dto.transaction;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -11,6 +11,8 @@ import java.util.UUID;
 @Getter
 @Setter
 public class TransactionDto implements Serializable {
+    @NonNull
+    private UUID id;
     @NonNull
     private LocalDate transactionDate;
     @NonNull

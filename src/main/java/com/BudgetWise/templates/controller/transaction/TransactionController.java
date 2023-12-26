@@ -1,13 +1,12 @@
-package com.BudgetWise.BudgetWise.controller.transaction;
+package com.BudgetWise.templates.controller.transaction;
 
-import com.BudgetWise.BudgetWise.Dto.transaction.TransactionDto;
-import com.BudgetWise.BudgetWise.entity.transaction.Transaction;
-import com.BudgetWise.BudgetWise.service.transaction.TransactionServiceImpl;
+import com.BudgetWise.templates.Dto.transaction.TransactionDto;
+import com.BudgetWise.templates.entity.transaction.Transaction;
+import com.BudgetWise.templates.service.transaction.TransactionServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +15,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/transaction")
 public class TransactionController {
     private final TransactionServiceImpl transactionService;
@@ -26,9 +26,9 @@ public class TransactionController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/find/{userId}")
-    public ResponseEntity<List<TransactionDto>> getAllTransactions(@PathVariable("userId") UUID userId) {
-        List<TransactionDto> allTransactions = transactionService.findAllTransactionsByUserId(userId)
+    @GetMapping("/getByYearAndMonth/{userId}/{year}/{month}")
+    public ResponseEntity<List<TransactionDto>> getTransactionsByUserAndYearAndMonth(@PathVariable("userId") UUID userId, @PathVariable("year") int year, @PathVariable("month") int month) {
+        List<TransactionDto> allTransactions = transactionService.findAllTransactionsByYearAndMonthAndUserId(userId, year, month)
                 .stream()
                 .map(transaction -> mapper.map(transaction,TransactionDto.class))
                 .collect(Collectors.toList());
@@ -41,23 +41,24 @@ public class TransactionController {
         return new ResponseEntity<>(newTransaction, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     @Transactional
-    public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction) {
-        Transaction updatedTransaction = transactionService.updateTransaction(transaction);
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable UUID id, @RequestBody Transaction transaction) {
+        System.out.println(1);
+        Transaction updatedTransaction = transactionService.updateTransaction(id, transaction);
         return new ResponseEntity<>(updatedTransaction, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
     @Transactional
-    public ResponseEntity<String> deleteTransaction(@PathVariable UUID id) {
+    public ResponseEntity<String> delete(@PathVariable UUID id) {
         Optional<Transaction> transactionOptional = transactionService.findTransactionById(id);
 
         if (transactionOptional.isPresent()) {
             transactionService.deleteTransaction(transactionOptional.get().getId());
-            return new ResponseEntity<>("Transaction deleted successfully", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Transaction not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
