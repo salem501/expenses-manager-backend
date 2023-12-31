@@ -1,9 +1,7 @@
 package com.BudgetWise.templates.entity.user;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,11 +9,12 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Builder
 @Table(name = "app_user")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

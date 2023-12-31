@@ -28,7 +28,7 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(userDetails, null);
+        return generateToken(userDetails, Map.of());
     }
 
     public String generateToken(UserDetails userDetails, Map<String, Object> extraClaims) {
