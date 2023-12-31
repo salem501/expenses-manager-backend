@@ -21,6 +21,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     public List<Transaction> findAllTransactionsByYearAndMonthAndUserId(UUID userId, int year, int month) {
+
         return transactionRepository.findAllTransactionsByYearAndMonth(userId, year, month);
     }
 
@@ -39,6 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
             transactionToUpdate.get().setAmount(transaction.getAmount());
             transactionToUpdate.get().setTransactionDate(transaction.getTransactionDate());
             transactionToUpdate.get().setDescription(transaction.getDescription());
+            transactionToUpdate.get().setType(transaction.getType());
             return transactionToUpdate.get();
         }
         throw new RuntimeException("transaction not found");

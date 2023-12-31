@@ -25,4 +25,5 @@ public class Transaction implements Serializable {
     private String category;
     private BigDecimal amount;
     private String description;
+    private TransactionType type;
 }

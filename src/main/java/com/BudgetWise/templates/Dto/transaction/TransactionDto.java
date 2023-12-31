@@ -1,5 +1,6 @@
 package com.BudgetWise.templates.Dto.transaction;
 
+import com.BudgetWise.templates.entity.transaction.TransactionType;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -19,6 +20,8 @@ public class TransactionDto implements Serializable {
     private String category;
     @NonNull
     private BigDecimal amount;
+
     private String description;
 
+    private TransactionType type;
 }
