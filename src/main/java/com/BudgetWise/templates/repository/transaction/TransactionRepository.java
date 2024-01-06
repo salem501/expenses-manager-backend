@@ -14,6 +14,6 @@ import java.util.UUID;
 public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
 
     @Query("select t from Transaction t where t.userId = :userId AND year(t.transactionDate) = :year AND month(t.transactionDate) = :month")
-    List<Transaction> findAllTransactionsByYearAndMonth(@Param("userId") UUID userId, @Param("year") int year, @Param("month") int month);
+    List<Transaction> findAllTransactionsByYearAndMonthAndUserId(@Param("userId") UUID userId, @Param("year") int year, @Param("month") int month);
 
 }

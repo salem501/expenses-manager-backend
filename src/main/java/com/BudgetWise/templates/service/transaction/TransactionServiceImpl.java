@@ -21,8 +21,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     public List<Transaction> findAllTransactionsByYearAndMonthAndUserId(UUID userId, int year, int month) {
-
-        return transactionRepository.findAllTransactionsByYearAndMonth(userId, year, month);
+        return transactionRepository.findAllTransactionsByYearAndMonthAndUserId(userId, year, month);
     }
 
     public Transaction addTransaction(Transaction transaction) {

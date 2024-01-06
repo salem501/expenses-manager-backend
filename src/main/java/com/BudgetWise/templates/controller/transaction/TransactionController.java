@@ -15,7 +15,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/transaction")
 public class TransactionController {
     private final TransactionServiceImpl transactionService;
@@ -44,7 +43,6 @@ public class TransactionController {
     @PutMapping("/update/{id}")
     @Transactional
     public ResponseEntity<Transaction> updateTransaction(@PathVariable UUID id, @RequestBody Transaction transaction) {
-        System.out.println(1);
         Transaction updatedTransaction = transactionService.updateTransaction(id, transaction);
         return new ResponseEntity<>(updatedTransaction, HttpStatus.OK);
     }
